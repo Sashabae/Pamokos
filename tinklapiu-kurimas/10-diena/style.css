@@ -1,0 +1,48 @@
+#myVideo {
+  position: fixed;
+  /* right: 0;
+    bottom: 0; */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+* {
+  margin: 0;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.flex-form {
+  background-color: white;
+}
+
+input,
+select,
+label {
+  padding: 16px;
+  border: none;
+}
+button {
+  padding: 18px;
+  background-color: rgb(255, 78, 78);
+  color: white;
+  border: none;
+}
+label {
+  border-right: 1px solid #ccc;
+}
+input {
+  border-right: 1px solid #ccc;
+}
+.padding {
+  background: rgba(31, 31, 31, 0.5);
+  padding: 15px;
+  border-radius: 4px;
+}

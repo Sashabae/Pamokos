@@ -1,13 +1,13 @@
 "use strict";
 
-const zuvys = Number(prompt("Kiek zuvu gyvena akvariume?"));
-const idedazuvu = Number(
+const zuvuSkaicius = Number(prompt("Kiek zuvu gyvena akvariume?"));
+const idedamaZuvu = Number(
   prompt("Kiek zuvu i akvariuma idedama kiekviena diena?")
 );
-const dienas = Number(prompt("Kiek dienu praejo?"));
+const praejoDienu = Number(prompt("Kiek dienu praejo?"));
 
-const idedadienuzuvys = idedazuvu * dienas;
+const kiekIsvisIdejo = idedamaZuvu * praejoDienu;
 
-const rezultatas = zuvys + idedadienuzuvys;
+const rezultatas = zuvuSkaicius + kiekIsvisIdejo;
 
-console.log("Po", dienas, "dienu akvariume gyvens", rezultatas, "zuvu");
+console.log("Po", praejoDienu, "dienu akvariume gyvens", rezultatas, "zuvu");

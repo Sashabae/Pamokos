@@ -13,3 +13,4 @@ for (let i = 1; i <= zingsniai; i++) {
 }
 console.log(`Suplojimu bus: ${suplojimai}`);
 console.log(`Spragtelejimu bus: ${spragtelejimai}`);
+

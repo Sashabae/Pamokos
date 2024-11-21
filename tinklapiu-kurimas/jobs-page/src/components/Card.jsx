@@ -14,18 +14,18 @@ export default function Card({
   // tools,
 }) {
   return (
-    <div className="row border">
-      <div className="col-1">
-        <img src={logo} alt={company} />
-      </div>
-      <div className="col">
-        <p>{company}</p>
-        <h6>{position}</h6>
-        <p>
-          {postedAt}
-          {contract}
-          {location}
-        </p>
+    <div className="cards-container">
+      <div className="row border align-items-center">
+        <div className="col-auto">
+          <img src={logo} alt={company} />
+        </div>
+        <div className="col">
+          <p>{company}</p>
+          <h6>{position}</h6>
+          <p>
+          {postedAt}&nbsp;{contract}&nbsp;{location}
+          </p>
+        </div>
       </div>
     </div>
   );

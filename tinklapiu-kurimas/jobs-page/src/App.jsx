@@ -5,7 +5,7 @@ import jobs from './data/data.json';
 function App() {
   return (
     <>
-      <div className="container">
+      <div className="container mt-3 mb-3">
       <div className="row">      
             <Header />  
           {jobs.map((job) => (

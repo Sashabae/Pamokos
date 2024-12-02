@@ -1,0 +1,20 @@
+{
+  "books": [
+    {
+      "title": "Bear",
+      "author": "Bear",
+      "category": "Science",
+      "price": "12",
+      "cover": "https://placebear.com/g/200/200",
+      "id": "51bd"
+    },
+    {
+      "title": "Numbers",
+      "author": "Number",
+      "category": "Drama",
+      "price": "555",
+      "cover": "https://via.placeholder.com/300.png/09f/fff",
+      "id": "5a76"
+    }
+  ]
+}

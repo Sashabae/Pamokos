@@ -133,6 +133,7 @@ war.addViking(viking2);
 war.addSaxon(saxon1);
 war.addSaxon(saxon2);
 
+// Fight
 console.log(war.vikingAttack());
 console.log(war.showStatus());
 

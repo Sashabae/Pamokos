@@ -1,8 +1,8 @@
-const { sql } = require('../dbConnection');
+const { sql } = require("../dbConnection");
 
 exports.createUser = async (newUser) => {
   const [user] = await sql`
-    INSERT INTO users ${sql(newUser, 'username', 'email', 'password', 'role')}
+    INSERT INTO users ${sql(newUser, "username", "email", "password", "role")}
     RETURNING *
     `;
   return user;

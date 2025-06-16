@@ -1,45 +1,61 @@
 const { sql } = require("../dbConnection");
 
 // GET ALL
-exports.getAllAppointments = async (user, search = "", sortBy = "petname", sortOrder = "desc") => {
-  let query = `SELECT * FROM appointments`;
-
-  // Search functionality
-  if (search) {
-    query += ` WHERE 
-      petname ILIKE '%${search}%' OR
-      ownername ILIKE '%${search}%' OR
-      notes ILIKE '%${search}%'
-    `;
-  }
-
-  // If the user is not an admin, filter by userId
-  if (user.role === "user") {
-    query += ` AND "userId" = ${user.id}`;
-  }
-
-  // Validate sortBy and sortOrder
+exports.getAllAppointments = async (
+  user,
+  search = "",
+  sortBy = "petname",
+  sortOrder = "desc"
+) => {
   const validSortColumns = ["petname", "date", "ownername"];
   const validSortOrders = ["asc", "desc"];
 
   if (!validSortColumns.includes(sortBy)) {
-    sortBy = "petname";  // Default
+    sortBy = "petname"; // Default
   }
   if (!validSortOrders.includes(sortOrder)) {
-    sortOrder = "asc";  // Default
+    sortOrder = "asc"; // Default
   }
 
-  query += ` ORDER BY ${sortBy} ${sortOrder}`;
+  // Start query and params
+  let query = `SELECT * FROM appointments`;
+  const whereClauses = [];
+  const params = [];
+
+  // Search condition (parameterized)
+  if (search) {
+    whereClauses.push(
+      `(petname ILIKE '%' || $${
+        params.length + 1
+      } || '%' OR ownername ILIKE '%' || $${
+        params.length + 1
+      } || '%' OR notes ILIKE '%' || $${params.length + 1} || '%')`
+    );
+    params.push(search);
+  }
+
+  // Filter by user ID if not admin
+  if (user.role === "user") {
+    whereClauses.push(`"userId" = $${params.length + 1}`);
+    params.push(user.id);
+  }
+
+  // Add WHERE if needed
+  if (whereClauses.length > 0) {
+    query += " WHERE " + whereClauses.join(" AND ");
+  }
+
+  // Append ORDER BY with validated inputs using unsafe (safe due to validation)
+  query += ` ORDER BY "${sortBy}" ${sortOrder.toUpperCase()}`;
 
   try {
-    const appointments = await sql.unsafe(query);
+    const appointments = await sql.unsafe(query, params);
     return { appointments };
   } catch (error) {
     console.error(error);
     throw new Error("Error fetching appointments");
   }
 };
-
 
 // GET BY ID
 exports.getAppointmentById = async (id) => {

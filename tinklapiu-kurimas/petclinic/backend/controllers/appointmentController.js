@@ -14,28 +14,24 @@ exports.getAllAppointments = async (req, res) => {
     const sortBy = req.query.sortBy || "petname"; // Default sorting by petname
     const sortOrder = req.query.sortOrder || "desc"; // Default descending order
 
-    let query = {
-      user: req.user.id, // Attach user ID if they are not admin
-    };
-
-    if (req.user.role !== "admin") {
-      query.user = req.user.id;
-    }
-
-    const appointments = await getAllAppointments(
-      query,
+    const { appointments } = await getAllAppointments(
+      req.user,
       search,
       sortBy,
       sortOrder
     );
 
+    // Return empty array if no appointments found
     if (!appointments || appointments.length === 0) {
-      throw new AppError("No appointments found", 404);
+      return res.status(200).json({
+        status: "success",
+        data: { appointments: [] },
+      });
     }
 
     res.status(200).json({
       status: "success",
-      data: appointments,
+      data: { appointments },
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

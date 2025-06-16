@@ -1,8 +1,18 @@
-Pet Clinic website with minimal ui
+# Pet Clinic website
 
-///////////////////////////////////
-Table in postgresql for appointments:
+A minimal pet clinic appointment system with a responsive design (optimized for screens 425px and wider) and a full backend
+![website preview image](image.png)
 
+## Features
+
+- User Roles (Users and Admins)
+- Appointment Registration and Management
+- Search and Sorting
+- Clean and Minimal User Interface
+
+## Database Setup (PostgreSQL)
+
+```bash
 CREATE TABLE appointments (
   id SERIAL PRIMARY KEY,
   petname VARCHAR(255) NOT NULL,
@@ -14,9 +24,6 @@ CREATE TABLE appointments (
   FOREIGN KEY (userId) REFERENCES users(id)
 );
 
-///////////////////////////////////
-Table for users:
-
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -24,3 +31,4 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role VARCHAR(50) NOT NULL
 );
+```

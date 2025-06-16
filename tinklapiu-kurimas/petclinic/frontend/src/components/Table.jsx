@@ -26,15 +26,7 @@ const Table = () => {
         }
       );
       const data = response.data.data.appointments;
-
-      if (user.role === "admin") {
-        setAppointments(data);
-      } else {
-        const filteredAppointments = data.filter(
-          (app) => app.userId === user.id
-        );
-        setAppointments(filteredAppointments);
-      }
+      setAppointments(data);
     } catch (error) {
       console.error("Error fetching appointments:", error);
     }

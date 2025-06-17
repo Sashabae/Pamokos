@@ -17,7 +17,6 @@ exports.getAllAppointments = async (
     sortOrder = "asc"; // Default
   }
 
-  // Start query and params
   let query = `SELECT * FROM appointments`;
   const whereClauses = [];
   const params = [];
@@ -34,18 +33,17 @@ exports.getAllAppointments = async (
     params.push(search);
   }
 
-  // Filter by user ID if not admin
+  // Filter by userId if not admin
   if (user.role === "user") {
     whereClauses.push(`"userId" = $${params.length + 1}`);
     params.push(user.id);
   }
 
-  // Add WHERE if needed
   if (whereClauses.length > 0) {
     query += " WHERE " + whereClauses.join(" AND ");
   }
 
-  // Append ORDER BY with validated inputs using unsafe (safe due to validation)
+  // Using unsafe (safe due to validation)
   query += ` ORDER BY "${sortBy}" ${sortOrder.toUpperCase()}`;
 
   try {
